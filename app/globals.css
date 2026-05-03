@@ -1,26 +1,213 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Semantic color tokens using OKLCH for better color perception */
+  --color-background: oklch(3.5% 0.01 264);
+  --color-foreground: oklch(100% 0 0);
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-accent: oklch(87% 0.15 100);
+  --color-accent-foreground: oklch(0% 0 0);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-card: oklch(7% 0.01 264);
+  --color-card-foreground: oklch(100% 0 0);
+
+  --color-border: oklch(16% 0.01 264);
+  --color-ring: oklch(87% 0.15 100);
+
+  --color-muted: oklch(53% 0.01 264);
+  --color-muted-foreground: oklch(53% 0.01 264);
+
+  --color-primary: oklch(87% 0.15 100);
+  --color-primary-foreground: oklch(0% 0 0);
+
+  --color-secondary: oklch(22% 0.02 264);
+  --color-secondary-foreground: oklch(100% 0 0);
+
+  --color-destructive: oklch(53% 0.22 27);
+  --color-destructive-foreground: oklch(98% 0.01 264);
+
+  /* Ring offset for focus states */
+  --color-ring-offset: oklch(3.5% 0.01 264);
+
+  /* Radius tokens */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+
+  /* Animation tokens */
+  --animate-fade-in: fade-in 0.2s ease-out;
+  --animate-fade-out: fade-out 0.2s ease-in;
+  --animate-slide-in: slide-in 0.3s ease-out;
+  --animate-slide-out: slide-out 0.3s ease-in;
+  --animate-dialog-in: dialog-fade-in 0.2s ease-out;
+  --animate-dialog-out: dialog-fade-out 0.15s ease-in;
+
+  --font-ogelo: var(--font-ogelo);
+  --font-sans: var(--font-ogelo), ui-sans-serif, system-ui;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes slide-in {
+    from {
+      transform: translateY(-0.5rem);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-out {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    to {
+      transform: translateY(-0.5rem);
+      opacity: 0;
+    }
+  }
+
+  @keyframes dialog-fade-in {
+    from {
+      opacity: 0;
+      transform: scale(0.95) translateY(-0.5rem);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  @keyframes dialog-fade-out {
+    from {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+
+    to {
+      opacity: 0;
+      transform: scale(0.95) translateY(-0.5rem);
+    }
+  }
+
+   --animate-infinite-scroll: scroll var(--animation-duration) linear infinite var(--animation-direction);
+
+  @keyframes scroll {
+    to {
+      transform: translateX(calc(-50% - 0.5rem));
+    }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Dark mode variant - use @custom-variant for class-based dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Base styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-sans);
+    letter-spacing: 0.05em;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+ .pet-sprite-frame {
+  --frame-w: 192px;
+  --frame-h: 208px;
+  --pet-scale: 1;
+
+  width: calc(var(--frame-w) * var(--pet-scale));
+  height: calc(var(--frame-h) * var(--pet-scale));
+  overflow: hidden;
+  position: relative;
+}
+
+.pet-sprite {
+  --sheet-cols: 8; 
+  --sheet-rows: 9; 
+  
+  --sprite-row: 0;
+  --sprite-frames: 8;
+  --sprite-duration: 1s;
+
+  width: var(--frame-w);
+  height: var(--frame-h);
+  background-image: var(--sprite-url);
+  
+  background-size: calc(var(--frame-w) * var(--sheet-cols)) calc(var(--frame-h) * var(--sheet-rows));
+  
+  --sprite-y: calc(var(--sprite-row) * var(--frame-h) * -1);
+  --sprite-end-x: calc(var(--sprite-frames) * var(--frame-w) * -1);
+  
+  background-position-y: var(--sprite-y);
+  background-position-x: 0px;
+  
+  background-repeat: no-repeat;
+  image-rendering: pixelated;
+  transform: scale(var(--pet-scale));
+  transform-origin: 0 0;
+   filter: drop-shadow(0px 8px 6px rgba(0, 0, 0, 0.3));
+  animation: pet-state-x var(--sprite-duration) steps(var(--sprite-frames)) infinite;
+  backface-visibility: hidden;
+}
+
+@keyframes pet-state-x {
+  from {
+    background-position-x: 0px;
+  }
+  to {
+    background-position-x: var(--sprite-end-x);
+  }
+}
 }
