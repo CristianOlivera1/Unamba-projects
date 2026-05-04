@@ -3,8 +3,6 @@
 import { motion } from "framer-motion";
 import { Navbar } from "@/components/layout/navbar";
 import { Underline } from "../ui/underline";
-import SpriteGrid from "../ui/spritegrid";
-import PetSprite from "../ui/spritegrid";
 import AutoPetSprite from "../ui/autopetsprite";
 
 export function Hero() {

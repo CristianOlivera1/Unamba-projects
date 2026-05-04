@@ -2,6 +2,7 @@
 
 import { Icon } from "@iconify/react";
 import { Subheading } from "@/components/ui/subheading";
+import { ButtonAnchor } from "../ui/button-anchor";
 
 export function SlideConclusion() {
   return (
@@ -39,22 +40,10 @@ export function SlideConclusion() {
 
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a
-            href="https://github.com"
-            target="_blank"
-            className="inline-flex items-center justify-center space-x-3 bg-white text-black px-8 py-4 rounded-full font-bold text-sm tracking-widest hover:bg-accent hover:text-white transition-all active:scale-95 group"
-          >
-            <span className="leading-none pt-[1px]">Ir al Repositorio</span>
-
-            <div className="flex items-center justify-center">
-              <Icon
-                icon="line-md:github-loop"
-                width="20"
-                height="20"
-                className="shrink-0"
-              />
-            </div>
-          </a>
+          <ButtonAnchor href="https://github.com/CristianOlivera1/Unamba-hack">
+            <span className="mr-1">Inscribirse</span>
+            <Icon icon="line-md:github-loop" width="18" />
+          </ButtonAnchor>
         </div>
       </div>
     </section>

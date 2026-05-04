@@ -162,6 +162,10 @@
     border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
+  a, button {
+    cursor: pointer;
+  }
+
  .pet-sprite-frame {
   --frame-w: 192px;
   --frame-h: 208px;

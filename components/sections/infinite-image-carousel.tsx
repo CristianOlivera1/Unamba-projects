@@ -63,7 +63,7 @@ export function InfiniteImageCarousel({ speed = "fast", direction = "left" }: In
   const animationDirection: "normal" | "reverse" = direction === "left" ? "normal" : "reverse";
 
   return (
-    <section className="relative w-full py-50 overflow-hidden mt-10">
+    <section className="relative w-full py-30 sm:py-50 overflow-hidden mt-10">
       
       <div className="absolute inset-0 w-full h-full pointer-events-none -z-10 opacity-35">
         <picture className="w-full h-full">
@@ -99,7 +99,7 @@ export function InfiniteImageCarousel({ speed = "fast", direction = "left" }: In
             {[...images, ...images].map((img, index) => (
               <div
                 key={`${img.id}-${index}`}
-                className="relative h-[250px] w-[350px] shrink-0 rounded-xl overflow-hidden border border-white/10 cursor-pointer group bg-[#121212]"
+                className="relative h-[190px] w-[290px] sm:h-[250px] sm:w-[350px] shrink-0 rounded-xl overflow-hidden border border-white/10 cursor-pointer group bg-[#121212]"
               >
                 <img
                   src={img.src}
