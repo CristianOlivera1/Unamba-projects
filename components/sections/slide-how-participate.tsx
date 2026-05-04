@@ -39,6 +39,7 @@ export function SlideHowToParticipate() {
           className="lg:w-1/2 flex flex-col justify-center"
         >
           <Subheading text="Slide 2: Cómo Participar" />
+          <div id="pet-destination" className="w-16 h-16 mb-4 mt-2"></div>
           <h2 className="text-4xl md:text-5xl font-medium leading-tight mb-10 max-w-2xl">
             Proceso de inscripción.
           </h2>

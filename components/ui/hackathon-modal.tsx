@@ -8,7 +8,7 @@ export function HackathonPopover() {
     const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
-        const timer = setTimeout(() => setIsOpen(true), 2500);
+        const timer = setTimeout(() => setIsOpen(true), 4000);
         return () => clearTimeout(timer);
     }, []);
 

@@ -36,9 +36,7 @@ export function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  // Usamos getBoundingClientRect para mediciones hiperprecisas
   const updateHoles = useCallback(() => {
-    // ESCRITORIO
     const desktopContainer = document.querySelector(".desktop-nav");
     const desktopEl = document.querySelector(`.desktop-nav a[href="#${activeSection}"]`);
 
@@ -55,7 +53,6 @@ export function Navbar() {
       setDesktopHole((prev) => ({ ...prev, width: 0 }));
     }
 
-    // MÓVIL
     const mobileContainer = document.querySelector(".mobile-nav");
     const mobileEl = document.querySelector(`.mobile-nav a[href="#${activeSection}"]`);
 
@@ -161,7 +158,6 @@ export function Navbar() {
             className="md:hidden mt-4 w-full relative rounded-2xl border border-white/10 shadow-2xl mobile-nav overflow-hidden"
           >
 
-            {/* FONDO OSCURO CON EL HUECO */}
             <div
               className="absolute inset-0 bg-black/80 backdrop-blur-xl rounded-2xl -z-10"
               style={{
@@ -180,7 +176,6 @@ export function Navbar() {
             />
 
             <div className="p-5 flex flex-col space-y-2 relative z-10">
-              {/* Título de la Sección / Marca */}
               <div className="px-4 py-2 mb-2">
                 <h2 className="text-xl font-bold text-white mt-1">
                   UNAMBA <span className="text-accent">Hackaton</span>

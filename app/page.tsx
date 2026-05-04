@@ -7,15 +7,20 @@ import { Footer } from "@/components/layout/footer";
 import { InfiniteImageCarousel } from "@/components/sections/infinite-image-carousel";
 import { SlideAwards } from "@/components/sections/slide-awards";
 import { HackathonPopover } from "@/components/ui/hackathon-modal";
+import { ScrollPetAnimation } from "@/components/ui/scrollpetanimation";
 
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col relative">
       <div className="fixed top-0 w-full h-screen -z-10 bg-cover bg-center opacity-40 grayscale bg-[#212121]"></div>
+      <div className="relative">
+        <img src="/images/sheet.webp" className="absolute z-20 top-[59vh] size-30 left-42" /> 
+        <ScrollPetAnimation />
+      </div>
       <HackathonPopover />
       <Hero />
       <InfiniteImageCarousel speed="fast" direction="left" />
-      <SlideHowToParticipate/>
+      <SlideHowToParticipate />
       <SlideRules />
       <SlideAwards />
       <SlideProjects />

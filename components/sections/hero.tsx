@@ -38,7 +38,6 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="max-w-3xl"
           >
-              <AutoPetSprite />
 
             <h1 className="text-5xl md:text-7xl font-medium leading-[1.1] mb-6 font-sans text-white">
               Impulsando el talento
