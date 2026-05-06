@@ -6,7 +6,6 @@ import { SlideConclusion } from "@/components/sections/slide-conclusion";
 import { Footer } from "@/components/layout/footer";
 import { InfiniteImageCarousel } from "@/components/sections/infinite-image-carousel";
 import { SlideAwards } from "@/components/sections/slide-awards";
-import { HackathonPopover } from "@/components/ui/hackathon-modal";
 import { ScrollPetAnimation } from "@/components/ui/scrollpetanimation";
 
 export default function Home() {
@@ -17,7 +16,6 @@ export default function Home() {
         <img src="/images/sheet.webp" className="absolute z-20 top-[59vh] size-30 left-42" /> 
         <ScrollPetAnimation />
       </div>
-      <HackathonPopover />
       <Hero />
       <InfiniteImageCarousel speed="fast" direction="left" />
       <SlideHowToParticipate />
