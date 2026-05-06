@@ -45,6 +45,7 @@ const prizes = [
 ];
 
 export function SlideAwards() {
+  const starsRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const balloonsWrapperRef = useRef<HTMLDivElement>(null);
   const balloonsImgRef = useRef<HTMLPictureElement>(null);
@@ -53,10 +54,10 @@ export function SlideAwards() {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         balloonsWrapperRef.current,
-        { 
-          y: 350, 
-          scale: 0.7, 
-          opacity: 0 
+        {
+          y: 350,
+          scale: 0.7,
+          opacity: 0
         },
         {
           y: -150,
@@ -81,6 +82,32 @@ export function SlideAwards() {
         yoyo: true,
         ease: "sine.inOut",
       });
+
+      const stars = starsRef.current?.querySelectorAll(".star-item");
+
+      if (stars) {
+        stars.forEach((star, index) => {
+          gsap.timeline({
+            repeat: -1,
+            defaults: { ease: "sine.inOut" }
+          })
+            .to(star, {
+              scale: 1.2,
+              filter: "brightness(1.5) drop-shadow(0 0 8px rgba(249, 218, 134, 0.8))",
+              duration: 0.8 + index * 0.2,
+              yoyo: true,
+              repeat: 1
+            })
+            .to(star, {
+              y: -10,
+              rotation: index % 2 === 0 ? 10 : -10,
+              duration: 1.5 + index * 0.3,
+              yoyo: true,
+              repeat: 1
+            }, 0);
+        });
+      }
+
     }, sectionRef);
 
     return () => ctx.revert();
@@ -90,20 +117,20 @@ export function SlideAwards() {
     <section
       ref={sectionRef}
       data-slide
-      className="py-24 px-6 md:px-12 max-w-[1440px] mx-auto relative min-h-screen flex items-center overflow-hidden"
+      className="py-24 px-6 md:px-12 max-w-360 mx-auto relative min-h-screen flex items-center overflow-hidden"
     >
       {/* Contenedor Ref para el ScrollTrigger */}
-      <div 
-        ref={balloonsWrapperRef} 
+      <div
+        ref={balloonsWrapperRef}
         className="absolute top-0 left-0 right-0 w-full flex justify-center pointer-events-none -z-10"
       >
         {/* Contenedor Ref para el movimiento infinito */}
         <picture ref={balloonsImgRef}>
           <source srcSet="/images/awards/balloons.avif" type="image/avif" />
-          <img 
-            src="/images/awards/balloons.png" 
-            alt="Globos decorativos" 
-            className="w-[822px] max-w-full mix-blend-screen" 
+          <img
+            src="/images/awards/balloons.png"
+            alt="Globos decorativos"
+            className="w-[822px] max-w-full mix-blend-screen"
           />
         </picture>
       </div>
@@ -154,16 +181,19 @@ export function SlideAwards() {
                             className={`${prize.imgWidth} relative z-10 drop-shadow-[0_20px_30px_rgba(0,0,0,0.8)] transition-transform duration-500 group-hover:scale-110 group-hover:-translate-y-2`}
                           />
                         </picture>
-                        <div className="absolute bottom-[60%] left-0 right-0 flex justify-center items-end gap-1 w-full z-20">
-                          <img src="/images/awards/left-star.png" alt="" className="max-w-[20px] animate-pulse" />
-                          <img src="/images/awards/middle-star.png" alt="" className="max-w-[35px] animate-pulse delay-75" />
-                          <img src="/images/awards/right-star.png" alt="" className="max-w-[20px] animate-pulse delay-150" />
+                        <div
+                          ref={starsRef}
+                          className="absolute bottom-[60%] left-0 right-0 flex justify-center items-end gap-1 w-full z-20"
+                        >
+                          <img src="/images/awards/left-star.png" alt="" className="star-item max-w-[20px]" />
+                          <img src="/images/awards/middle-star.png" alt="" className="star-item max-w-[35px]" />
+                          <img src="/images/awards/right-star.png" alt="" className="star-item max-w-[20px]" />
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="px-6 pb-12 pt-16 text-center relative z-20">
-                    <span className="text-xs font-bold uppercase tracking-widest text-[#F9DA86]">
+                    <span className="text-xs font-bold uppercase text-[#F9DA86] tracking-[0.2em]">
                       {prize.place}
                     </span>
                     <h3 className="text-3xl lg:text-4xl font-bold mt-2 mb-3 text-white">
@@ -187,7 +217,7 @@ export function SlideAwards() {
                     </picture>
                   </div>
                   <div className="pt-16">
-                    <span className="text-xs font-semibold uppercase tracking-widest text-zinc-500">
+                    <span className="text-xs font-semibold uppercase text-white/80 tracking-[0.2em]">
                       {prize.place}
                     </span>
                     <h3 className="text-2xl font-bold mt-2 mb-3 text-white">

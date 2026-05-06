@@ -1,16 +1,21 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import { Subheading } from "@/components/ui/subheading";
+import { HackathonPopover } from "@/components/ui/hackathon-modal";
 
 const steps = [
-   {
+  {
     num: "1",
     title: "Crea tu proyecto",
     desc: (
       <>
-        Usa la tecnología que quieras y despliega tu app web. 
-        Mira nuestras <a href="/suggest" className="text-accent hover:underline font-normal">sugerencias de hosting gratuito</a>.
+        Usa la tecnología que quieras y despliega tu app web. Mira nuestras{" "}
+        <a href="/suggest" className="text-accent hover:underline font-normal">
+          sugerencias de hosting gratuito
+        </a>
+        .
       </>
     ),
   },
@@ -19,18 +24,35 @@ const steps = [
     title: "Registra tu participación",
     desc: (
       <>
-        Sube tu issue en el <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline font-normal">repositorio oficial</a> utilizando la plantilla indicada.
+        Sube tu issue en el{" "}
+        <a
+          href="https://github.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-accent hover:underline font-normal"
+        >
+          repositorio oficial
+        </a>{" "}
+        utilizando la plantilla indicada.
       </>
     ),
   },
 ];
 
 export function SlideHowToParticipate() {
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  const isInView = useInView(sectionRef, { amount: 0.3 });
+
   return (
-    <section id="stake"
+    <section
+      ref={sectionRef}
+      id="stake"
       data-slide
-      className="py-24 md:py-32 px-6 md:px-12 max-w-[1440px] mx-auto min-h-screen flex items-center"
+      className="py-24 md:py-32 px-6 md:px-12 max-w-[1440px] mx-auto min-h-screen flex items-center relative"
     >
+      <HackathonPopover show={isInView} />
+
       <div className="flex flex-col lg:flex-row justify-between gap-16 lg:gap-24 w-full">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -39,7 +61,7 @@ export function SlideHowToParticipate() {
           className="lg:w-1/2 flex flex-col justify-center"
         >
           <Subheading text="Slide 2: Cómo Participar" />
-          <div id="pet-destination" className="w-16 h-16 mb-4 mt-2"></div>
+          <div id="pet-destination"></div>
           <h2 className="text-4xl md:text-5xl font-medium leading-tight mb-10 max-w-2xl">
             Proceso de inscripción.
           </h2>
@@ -74,7 +96,7 @@ export function SlideHowToParticipate() {
               muted
               playsInline
               className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-              src="https://assets.mixkit.co/videos/preview/mixkit-software-developer-working-on-code-4174-large.mp4"
+              src="https://www.pexels.com/es-es/download/video/34268137/"
             ></video>
             <div className="absolute inset-0 bg-background/30 group-hover:bg-transparent transition-colors duration-500"></div>
           </div>
