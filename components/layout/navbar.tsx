@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ButtonAnchor } from "../ui/button-anchor";
 import { Icon } from "@iconify/react";
+import Link from "next/dist/client/link";
 
 const NAV_LINKS = [
   { id: "home", label: "Inicio" },
@@ -91,12 +92,16 @@ export function Navbar() {
       className="fixed top-4 inset-x-0 z-50 flex flex-col px-4 md:px-8 w-full max-w-[1440px] mx-auto"
     >
       <div className="flex items-center justify-between relative">
-        <a href="#home" className="flex items-center cursor-pointer shrink-0 z-20">
-          <img src="/images/logo.webp" alt="Logo UNAMBA Hack" className="w-16 h-16 object-contain" />
+        <Link href="/" className="flex items-center cursor-pointer shrink-0 z-20">
+          <img
+            src="/images/logo.webp"
+            alt="Logo UNAMBA Hack"
+            className="w-16 h-16 object-contain"
+          />
           <span className="font-semibold text-lg pt-2 tracking-widest text-white hidden sm:block">
             UNAMBA <span className="text-accent">Hackaton</span>
           </span>
-        </a>
+        </Link>
 
         <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 z-10 w-auto">
           <div className="relative flex p-1.5 items-center justify-center space-x-1 text-sm desktop-nav rounded-full border border-white/10">
@@ -188,8 +193,8 @@ export function Navbar() {
                   href={`#${link.id}`}
                   onClick={() => setIsMobileOpen(false)}
                   className={`px-4 py-3 rounded-lg text-sm transition-all duration-300 ${activeSection === link.id
-                      ? "bg-white/5 text-white font-semibold border border-white/10 shadow-sm"
-                      : "text-[#888] hover:text-white hover:bg-white/5 border border-transparent"
+                    ? "bg-white/5 text-white font-semibold border border-white/10 shadow-sm"
+                    : "text-[#888] hover:text-white hover:bg-white/5 border border-transparent"
                     }`}
                 >
                   {link.label}
